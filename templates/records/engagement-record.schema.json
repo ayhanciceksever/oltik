@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://oltik.ai/schemas/engagement-record.schema.json",
+  "title": "Oltik iş kaydı (asgari kayıt şeması, §7.3)",
+  "type": "object",
+  "required": ["engagement_code", "scope_version", "service", "commercial_path", "status"],
+  "properties": {
+    "engagement_code": { "type": "string", "description": "Müşteri/iş kodu (gerçek ad değil)" },
+    "scope_version": { "type": "string" },
+    "service": { "enum": ["ai-audit", "automation-setup", "team-training", "maintenance"] },
+    "commercial_path": { "enum": ["A", "B", "direct-setup"] },
+    "status": { "enum": ["candidate", "proposal", "accepted", "in-delivery", "delivered", "closed", "lost"] },
+    "process_owner": { "type": "string" },
+    "data_owner": { "type": "string" },
+    "measurements": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "evidence_label"],
+        "properties": {
+          "name": { "type": "string" },
+          "numerator": { "type": ["number", "null"] },
+          "denominator": { "type": ["number", "null"] },
+          "source": { "type": "string" },
+          "evidence_label": { "enum": ["ölçüldü", "kayıtla-desteklendi", "görüşmeye-dayanıyor", "bilinmiyor"] }
+        }
+      }
+    },
+    "assumptions": { "type": "array", "items": { "type": "string" } },
+    "options": { "type": "array", "items": { "type": "string" } },
+    "risks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": { "risk": { "type": "string" }, "control_owner": { "type": "string" } }
+      }
+    },
+    "human_approvals": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": { "reviewer_role": { "type": "string" }, "date": { "type": "string", "format": "date" }, "result": { "type": "string" } }
+      }
+    },
+    "delivery_version": { "type": "string" },
+    "decision": { "enum": ["start", "prepare", "simpler-solution", "do-not-invest", null] },
+    "decision_rationale": { "type": "string" },
+    "economics": {
+      "type": "object",
+      "properties": {
+        "revenue_excl_vat_try": { "type": ["number", "null"] },
+        "collected_try": { "type": ["number", "null"] },
+        "direct_costs_try": { "type": ["number", "null"] },
+        "labor_hours": {
+          "type": "object",
+          "properties": {
+            "sales": { "type": ["number", "null"] },
+            "delivery": { "type": ["number", "null"] },
+            "rework": { "type": ["number", "null"] }
+          }
+        }
+      }
+    },
+    "data_access_closed": { "type": "boolean" }
+  }
+}

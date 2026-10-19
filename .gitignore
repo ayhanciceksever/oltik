@@ -1,0 +1,36 @@
+# Gerçek müşteri verisi asla commit edilmez
+engagements/*
+!engagements/README.md
+!engagements/_synthetic-example/
+!engagements/_synthetic-example/**
+data/*
+!data/synthetic/
+!data/synthetic/**
+
+# Gizli bilgiler
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+dist/
+build/
+*.egg-info/
+
+# Node
+node_modules/
+
+# İşletim sistemi / editör
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
